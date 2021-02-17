@@ -6,11 +6,15 @@ import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
 import oracle.ucp.jdbc.PoolDataSource;
 import oracle.ucp.jdbc.PoolDataSourceFactory;
 
 @Configuration
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class MyConfig {
     @Bean
     public DataSource dataSource() throws SQLException {
@@ -24,5 +28,5 @@ public class MyConfig {
         dataSource.setMaxPoolSize(10);
         return dataSource;
     }
-    
+
 }

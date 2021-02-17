@@ -13,6 +13,11 @@ import org.springframework.stereotype.Service;
 public class BookService {
     @Autowired
     BookRepository bookRepository;
+
+    public BookService(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
+    }
+
     public List<Book> getAllBooks() {
         List<Book> books = bookRepository.findAll();
 
