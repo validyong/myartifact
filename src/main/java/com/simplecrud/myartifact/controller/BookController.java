@@ -14,30 +14,32 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://192.168.0.58:4200")
 @RestController
+@RequestMapping("api")
 public class BookController {
     @Autowired
     BookService bookService;
 
-    @GetMapping("/book")
+    @GetMapping("/books")
     public List<Book> getAllBooks() {
         return bookService.getAllBooks();
     }
 
-    @GetMapping("/book/{isbn}")
+    @GetMapping("/books/{isbn}")
     public ResponseEntity <Book> getBookByIsbn(@PathVariable String isbn) {
         return bookService.getBookByIsbn(isbn);
     }
 
-    @PutMapping("/book/{idbn}")
+    @PutMapping("/books/{idbn}")
     public ResponseEntity <Book> updateBook(@PathVariable String isbn, @RequestBody Book bookDetails) {
         return bookService.updateBook(isbn, bookDetails);
     }
 
-    @DeleteMapping("/book/{isbn}")
+    @DeleteMapping("/books/{isbn}")
     public ResponseEntity < Map <String, Boolean>> deleteBook(@PathVariable String isbn) {
         return bookService.deleteBook(isbn);
     }
