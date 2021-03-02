@@ -11,7 +11,6 @@ import javax.persistence.Table;
 public class Book {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="isbn")
     private String isbn;
     @Column(name="book_name")

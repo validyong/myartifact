@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +27,7 @@ public class BookController {
 
     @GetMapping("/books")
     public List<Book> getAllBooks() {
+        System.out.println("getAllBooks()");
         return bookService.getAllBooks();
     }
 
@@ -34,13 +36,22 @@ public class BookController {
         return bookService.getBookByIsbn(isbn);
     }
 
-    @PutMapping("/books/{idbn}")
-    public ResponseEntity <Book> updateBook(@PathVariable String isbn, @RequestBody Book bookDetails) {
+    @PostMapping("/books")
+    public ResponseEntity <Book> createBook(@RequestBody Book bookDetails) {
+        System.out.println("post: ");
+        return bookService.createBook(bookDetails);
+    }
+
+    @PutMapping("/books/{isbn}")
+    public ResponseEntity <Book> updateBook(@PathVariable("isbn") String isbn, @RequestBody Book bookDetails) {
+        System.out.println("update: " + isbn);
+        System.out.println(bookDetails.getBookName());
         return bookService.updateBook(isbn, bookDetails);
     }
 
     @DeleteMapping("/books/{isbn}")
-    public ResponseEntity < Map <String, Boolean>> deleteBook(@PathVariable String isbn) {
+    public ResponseEntity < Map <String, Boolean>> deleteBook(@PathVariable("isbn") String isbn) {
+        System.out.println("delete: " + isbn);
         return bookService.deleteBook(isbn);
     }
 

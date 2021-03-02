@@ -35,6 +35,11 @@ public class BookService {
         return ResponseEntity.ok(book);
     }
 
+    public ResponseEntity <Book> createBook(@RequestBody Book bookDetails) {
+        Book updatedBook = bookRepository.save(bookDetails);
+        return ResponseEntity.ok(updatedBook);
+    }
+
     public ResponseEntity <Book> updateBook(@PathVariable String isbn, @RequestBody Book bookDetails) {
         Book book = bookRepository.findById(isbn).orElseThrow();
 
